@@ -9,7 +9,7 @@ The demonstration is left as limited as possible - e.g. no build step beyond `ts
 
 First, run `npm install` in `frontend/` to install Typescript.
 
-1. Generate the API with `./build_api.sh` (generates `target/ts/services.ts` and `target/ts/types.ts`)
+1. Generate the API with `./build_api.sh` (generates `target/ts/api.ts` and `target/ts/types.ts`)
 2. Build the frontend with `./build_frontend.sh` (compiles TypeScript in `frontend/src`)
 3. Run the server with `./run_server.sh` (runs Javalin server on localhost:8080)
 

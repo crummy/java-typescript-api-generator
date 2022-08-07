@@ -31,7 +31,7 @@ public class TypeScriptApiGenerator {
         Path root = Paths.get(TypeScriptApiGenerator.class.getResource("/").toURI()).getParent();
         Path folder = root.resolve("ts");
         folder.toFile().mkdirs();
-        Path outputFile = folder.resolve("services.ts");
+        Path outputFile = folder.resolve("api.ts");
         Files.writeString(outputFile, output.toString());
         System.out.println("Wrote services to " + outputFile);
     }
@@ -55,7 +55,7 @@ public class TypeScriptApiGenerator {
                                 String tsType = TypeScriptConverter.getTsType(param.getParameterizedType(), TYPES);
                                 return param.getName() + ": " + tsType;
                             }).collect(Collectors.joining(", "));
-            String path = "/services/" + service.getSimpleName() + "/" + methodName;
+            String path = "/api/" + service.getSimpleName() + "/" + methodName;
             String bodyParameters = Arrays.stream(method.getParameters())
                             .map(param -> param.getName() + ": JSON.stringify(" + param.getName() + ")"
                             ).collect(Collectors.joining(", "));

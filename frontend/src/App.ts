@@ -1,4 +1,4 @@
-import { UsersApi } from "./api/services.js"
+import { UsersApi } from "./api/api.js"
 
 const usersApi = new UsersApi();
 

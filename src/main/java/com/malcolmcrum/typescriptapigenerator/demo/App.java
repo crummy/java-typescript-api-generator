@@ -31,10 +31,10 @@ public class App {
     }
 
     private static <T> void exposeService(Javalin app, Class<T> api, T implementation) {
-        String serviceName = api.getSimpleName();
+        String apiName = api.getSimpleName();
         for (Method method : api.getMethods()) {
-            // handle calls to, for example, POST /services/UsersService/getUser
-            String path = "/services/" + serviceName + "/" + method.getName();
+            // handle calls to, for example, POST /api/UsersApi/getUser
+            String path = "/api/" + apiName + "/" + method.getName();
             app.post(path, (ctx) -> {
                 // remember, our JSON is just a key value pair of param name to more json. json'd json.
                 @SuppressWarnings("unchecked")
@@ -47,11 +47,11 @@ public class App {
                     args.add(arg);
                 }
                 try {
-                    var response = method.invoke(implementation, args.toArray());
-                    var json = objectMapper.writeValueAsBytes(response);
+                    var result = method.invoke(implementation, args.toArray());
+                    var json = objectMapper.writeValueAsBytes(result);
                     ctx.result(json);
                 } catch (Exception e) {
-                    throw new RuntimeException("Failed to invoke " + serviceName + "/" + method, e);
+                    throw new RuntimeException("Failed to invoke " + apiName + "/" + method, e);
                 }
             });
             log.info("Exposed API endpoint " + path);
