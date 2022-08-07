@@ -9,5 +9,5 @@ public interface UsersApi {
 
     UserDto getUser(int userId);
 
-    void addUser(UserDto user);
+    UserDto addUser(String username);
 }

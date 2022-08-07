@@ -10,8 +10,17 @@
 
 <body>
 
-<h1 class="header"></h1>
-<ul class="users-list"></ul>
+<div style="max-width: 800px; margin: 0 auto">
+    <h1 class="header"></h1>
+    <ul class="users-list"></ul>
+    <h2>Create User</h2>
+    <form id="create-user">
+        <label for="username">Username</label>
+        <input type="text" id="username" required>
+        <button type="submit" id="create-user-button">Create</button>
+        <p id="create-user-result"></p>
+    </form>
+</div>
 
 </body>
 </html>

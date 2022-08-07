@@ -6,15 +6,16 @@ import com.malcolmcrum.typescriptapigenerator.demo.dtos.UserDto;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class UsersService implements UsersApi {
+    private final AtomicInteger userIdCounter = new AtomicInteger(1);
     private final Map<Integer, UserDto> users = new HashMap<>();
 
     public UsersService() {
-        var admin = new UserDto(1, "admin");
-        var user = new UserDto(2, "jimbo");
-        addUser(admin);
-        addUser(user);
+        addUser("admin");
+        addUser("jimbo");
+        addUser("james");
     }
 
     @Override
@@ -28,7 +29,10 @@ public class UsersService implements UsersApi {
     }
 
     @Override
-    public void addUser(UserDto user) {
-        users.put(user.userId(), user);
+    public UserDto addUser(String username) {
+        int id = userIdCounter.getAndIncrement();
+        UserDto user = new UserDto(id, username);
+        users.put(id, user);
+        return user;
     }
 }
