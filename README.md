@@ -5,9 +5,14 @@ to a backend implementation, and generate a Typescript client for the API.
 
 The demonstration is left as limited as possible - e.g. no build step beyond `tsc`
 
-## Usage
+## Requirements
 
-First, run `npm install` in `frontend/` to install Typescript.
+* Java 17+
+* Node 16+ (probably earlier will work too)
+* Maven 3.8+
+* `cd frontend && npm install` to install Typescript
+
+## Usage
 
 1. Generate the API with `./build_api.sh` (generates `target/ts/api.ts` and `target/ts/types.ts`)
 2. Build the frontend with `./build_frontend.sh` (compiles TypeScript in `frontend/src`)
