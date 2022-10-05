@@ -1,4 +1,4 @@
-import { UsersApi } from "./api/api.js"
+import { UsersApi } from "../../target/ts/api"
 
 const usersApi = new UsersApi();
 

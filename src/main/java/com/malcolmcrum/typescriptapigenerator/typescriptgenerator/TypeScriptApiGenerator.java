@@ -57,17 +57,15 @@ public class TypeScriptApiGenerator {
                             }).collect(Collectors.joining(", "));
             String path = "/api/" + service.getSimpleName() + "/" + methodName;
             String bodyParameters = Arrays.stream(method.getParameters())
-                            .map(param -> param.getName() + ": JSON.stringify(" + param.getName() + ")"
-                            ).collect(Collectors.joining(", "));
+                            .map(param -> param.getName())
+                            .collect(Collectors.joining(", "));
             // oh how I wish for string interpolation in Java...
             String typescriptMethod = String.format("""
                         %s(%s): Promise<%s> {
                             return fetch('%s', {
                                 method: 'POST',
                                 headers: {'Accept':'application/json', 'Content-Type': 'application/json'},
-                                body: JSON.stringify({
-                                    %s
-                                }, (k, v) => v === undefined ? null : v)
+                                body: JSON.stringify({%s}, (k, v) => v === undefined ? null : v)
                             }).then(r => r.json())
                         }
                     """, methodName, parameters, returnType, path, bodyParameters);

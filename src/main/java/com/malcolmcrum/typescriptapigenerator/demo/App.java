@@ -1,5 +1,6 @@
 package com.malcolmcrum.typescriptapigenerator.demo;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.malcolmcrum.typescriptapigenerator.demo.api.UsersApi;
 import com.malcolmcrum.typescriptapigenerator.demo.services.UsersService;
@@ -36,14 +37,11 @@ public class App {
             // handle calls to, for example, POST /api/UsersApi/getUser
             String path = "/api/" + apiName + "/" + method.getName();
             app.post(path, (ctx) -> {
-                // remember, our JSON is just a key value pair of param name to more json. json'd json.
-                @SuppressWarnings("unchecked")
-                Map<String, String> body = ctx.bodyAsClass(Map.class);
+                JsonNode tree = objectMapper.readTree(ctx.body());
                 List<Object> args = new ArrayList<>();
                 for (Parameter param : method.getParameters()) {
-                    String json = body.get(param.getName());
-                    // here's where we actually deserialize the parameters
-                    var arg = objectMapper.readValue(json, param.getType());
+                    JsonNode node = tree.get(param.getName());
+                    var arg = objectMapper.treeToValue(node, param.getType());
                     args.add(arg);
                 }
                 try {

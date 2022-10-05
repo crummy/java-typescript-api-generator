@@ -18,4 +18,7 @@
       <module name="java-typescript-api-demo" options="-parameters" />
     </option>
   </component>
+  <component name="TypeScriptCompiler">
+    <option name="nodeInterpreterTextField" value="wsl://Ubuntu-20.04@/usr/bin/node" />
+  </component>
 </project>
