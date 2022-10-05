@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+// Generates a TypeScript file for interfacing with the API.
+// This is done using string concatenation for simplicity's sake,
+// but I suggest using a templating engine if you want to do this yourself.
 public class TypeScriptApiGenerator {
     private static final String TYPES = "types";
     private final Class<?> service;
